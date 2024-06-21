@@ -1,0 +1,1843 @@
+{
+	"info": {
+		"_postman_id": "9ab240ef-3c83-4d07-83e2-46018b378e45",
+		"name": "homeWorkIvankov",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10794208"
+	},
+	"item": [
+		{
+			"name": "homeWork13",
+			"item": [
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "statusCodeNot200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is not 200\", function () {",
+											"    pm.response.to.not.have.status(200);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": firstName,",
+											"    \"lastName\": lastName,",
+											"    \"email\": email,",
+											"    \"password\": password,",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "negativeCheckBodyIsNotBe",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is not 200\", function () {",
+											"    pm.response.to.not.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"The response has all properties\", () => {",
+											"    const responseJson = pm.response.json();",
+											"    pm.expect(responseJson.data.userId).to.not.be.a('string');",
+											"    pm.expect(responseJson.data.photoFilename).to.not.be.a('number');",
+											"    pm.expect(responseJson.data.distanceUnits).to.not.be.a('number');",
+											"    pm.expect(responseJson.data.currency).to.not.be.a('number');",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": firstName,",
+											"    \"lastName\": lastName,",
+											"    \"email\": email,",
+											"    \"password\": password,",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "emtyBodyName",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is  400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response status = error\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.equal('error');",
+											"});",
+											"",
+											"pm.test(\"Response status message = field name is not empty\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.exist.and.to.not.be.empty;",
+											"    pm.expect(pm.response.json().message).to.exist.and.to.not.be.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": \"\",",
+											"    \"lastName\": lastName,",
+											"    \"email\": email,",
+											"    \"password\": password,",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "emptyBodyLastName",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is  400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response status = error\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.equal('error');",
+											"});",
+											"",
+											"pm.test(\"Response status message = field name is not empty\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.exist.and.to.not.be.empty;",
+											"    pm.expect(pm.response.json().message).to.exist.and.to.not.be.empty;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": firstName,",
+											"    \"lastName\": \"\",",
+											"    \"email\": email,",
+											"    \"password\": password,",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "emptBodyEmail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is  400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response status = error\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.equal('error');",
+											"});",
+											"",
+											"pm.test(\"Response status message = field name is not empty\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.exist.and.to.not.be.empty;",
+											"    pm.expect(pm.response.json().message).to.exist.and.to.not.be.empty;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": firstName,",
+											"    \"lastName\": lastName,",
+											"    \"email\": \"\",",
+											"    \"password\": password,",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "emptBodyPassword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is  400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response status = error\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.equal('error');",
+											"});",
+											"",
+											"pm.test(\"Response status message = field name is not empty\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json().status).to.exist.and.to.not.be.empty;",
+											"    pm.expect(pm.response.json().message).to.exist.and.to.not.be.empty;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Clear existing collection variables",
+											"pm.collectionVariables.clear();",
+											"",
+											"// Generate and set variables",
+											"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+											"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+											"",
+											"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+											"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+											"",
+											"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+											"pm.collectionVariables.set(\"generatedEmail\", email);",
+											"",
+											"// Generate a random password",
+											"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+											"pm.collectionVariables.set(\"generatedPassword\", password);",
+											"",
+											"// Create JSON object for the signup request",
+											"let createCustomerBody = {",
+											"    \"name\": firstName,",
+											"    \"lastName\": lastName,",
+											"    \"email\": email,",
+											"    \"password\": \"\",",
+											"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+											"};",
+											"",
+											"// Log JSON object for debugging",
+											"console.log(JSON.stringify(createCustomerBody, null, 2));",
+											"",
+											"// Set the request body as a stringified JSON object",
+											"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{signupRequestBody}}\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "createCustomer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"    pm.expect(responseJson.data.userId).to.be.a('number');",
+									"    pm.expect(responseJson.data.photoFilename).to.be.a('string');",
+									"    pm.expect(responseJson.data.distanceUnits).to.be.a('string');",
+									"    pm.expect(responseJson.data.currency).to.be.a('string');",
+									"});",
+									"",
+									"// Add to check JSON schema    ",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"status\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"data\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"userId\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"photoFilename\": {",
+									"                    \"type\": \"string\"",
+									"                },",
+									"                \"distanceUnits\": {",
+									"                    \"type\": \"string\"",
+									"                },",
+									"                \"currency\": {",
+									"                    \"type\": \"string\"",
+									"                }",
+									"            },",
+									"            \"required\": [\"userId\", \"photoFilename\", \"distanceUnits\", \"currency\"]",
+									"        }",
+									"    },",
+									"    \"required\": [\"status\", \"data\"]",
+									"};",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Clear existing collection variables",
+									"pm.collectionVariables.clear();",
+									"",
+									"// Generate and set variables",
+									"let firstName = pm.variables.replaceIn('{{$randomFirstName}}');",
+									"pm.collectionVariables.set(\"generatedFirstName\", firstName);",
+									"",
+									"let lastName = pm.variables.replaceIn('{{$randomLastName}}');",
+									"pm.collectionVariables.set(\"generatedLastName\", lastName);",
+									"",
+									"let email = pm.variables.replaceIn('{{$randomEmail}}');",
+									"pm.collectionVariables.set(\"generatedEmail\", email);",
+									"",
+									"// Generate a random password",
+									"let password = pm.variables.replaceIn('{{$randomPassword}}');  ",
+									"pm.collectionVariables.set(\"generatedPassword\", password);",
+									"",
+									"// Create JSON object for the signup request",
+									"let createCustomerBody = {",
+									"    \"name\": firstName,",
+									"    \"lastName\": lastName,",
+									"    \"email\": email,",
+									"    \"password\": password,",
+									"    \"repeatPassword\": password  // Ensure repeatPassword matches password",
+									"};",
+									"",
+									"// Log JSON object for debugging",
+									"console.log(JSON.stringify(createCustomerBody, null, 2));",
+									"",
+									"// Set the request body as a stringified JSON object",
+									"pm.collectionVariables.set(\"signupRequestBody\", JSON.stringify(createCustomerBody));",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{signupRequestBody}}\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signIn",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let trueOrFalse = pm.variables.replaceIn('{{$randomBoolean}}');",
+									"pm.collectionVariables.set(\"generatedRemember\", trueOrFalse);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"    pm.expect(responseJson.data.userId).to.be.a('number');",
+									"    pm.expect(responseJson.data.photoFilename).to.be.a('string');",
+									"    pm.expect(responseJson.data.distanceUnits).to.be.a('string');",
+									"    pm.expect(responseJson.data.currency).to.be.a('string');",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"data\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"userId\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"photoFilename\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"distanceUnits\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"currency\": {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"userId\",",
+									"        \"photoFilename\",",
+									"        \"distanceUnits\",",
+									"        \"currency\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\",",
+									"    \"data\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"{{generatedEmail}}\",\n  \"password\": \"{{generatedPassword}}\",\n  \"remember\": {{generatedRemember}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editCustomerAllFields",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let dateOfBirth = pm.variables.replaceIn('{{$randomDatePast}}');",
+									"pm.collectionVariables.set(\"generatedDateOfBirth\", dateOfBirth);",
+									"",
+									"let country = pm.variables.replaceIn('{{$randomCountry}}');",
+									"pm.collectionVariables.set(\"generatedCountry\", country);",
+									"",
+									"let timestamp = Date.now();",
+									"let photoName = \"user-\" + timestamp + \".jpg\";",
+									"pm.collectionVariables.set(\"randomPhotoName\", photoName);",
+									"console.log(photoName);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"    pm.expect(responseJson.data.userId).to.be.a('number');",
+									"    pm.expect(responseJson.data.photoFilename).to.be.a('string');",
+									"    pm.expect(responseJson.data.name).to.be.a('string');",
+									"    pm.expect(responseJson.data.lastName).to.be.a('string');",
+									"    pm.expect(responseJson.data.dateBirth).to.be.a('string');",
+									"    pm.expect(responseJson.data.country).to.be.a('string');",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"data\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"userId\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"photoFilename\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"name\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"lastName\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"dateBirth\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"country\": {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"userId\",",
+									"        \"photoFilename\",",
+									"        \"name\",",
+									"        \"lastName\",",
+									"        \"dateBirth\",",
+									"        \"country\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\",",
+									"    \"data\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"photo\": \"{{randomPhotoName}}\",\n  \"name\": \"{{generatedFirstName}}\",\n  \"lastName\": \"{{generatedLastName}}\",\n  \"dateBirth\": \"{{generatedDateOfBirth}}\",\n  \"country\": \"{{generatedCountry}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let changedPassword = pm.variables.replaceIn('{{$randomPassword}}');  ",
+									"pm.collectionVariables.set(\"generatePasswordForChange\", changedPassword);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"    pm.expect(responseJson.data.userId).to.be.a('number');",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"data\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"userId\": {",
+									"          \"type\": \"number\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"userId\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\",",
+									"    \"data\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"oldPassword\": \"{{generatedPassword}}\",\n  \"password\": \"{{generatePasswordForChange}}\",\n  \"repeatPassword\": \"{{generatePasswordForChange}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logOut",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signInSecondTime",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"    pm.expect(responseJson.data.userId).to.be.a('number');",
+									"    pm.expect(responseJson.data.photoFilename).to.be.a('string');",
+									"    pm.expect(responseJson.data.distanceUnits).to.be.a('string');",
+									"    pm.expect(responseJson.data.currency).to.be.a('string');",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"data\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"userId\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"photoFilename\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"distanceUnits\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"currency\": {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"userId\",",
+									"        \"photoFilename\",",
+									"        \"distanceUnits\",",
+									"        \"currency\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\",",
+									"    \"data\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"{{generatedEmail}}\",\n  \"password\": \"{{generatePasswordForChange}}\",\n  \"remember\": {{generatedRemember}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Car Brands",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"// Check if there are any brands in the response",
+									"if (responseJson.data.length > 0) {",
+									"    // Pick a random brand from the list",
+									"    var randomBrand = responseJson.data[Math.floor(Math.random() * responseJson.data.length)];",
+									"    pm.collectionVariables.set(\"carBrandId\", randomBrand.id);",
+									"} else {",
+									"    throw new Error(\"No brands found in the response.\");",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", function () {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\");",
+									"    pm.expect(responseJson.data).to.be.an('array');",
+									"    if(responseJson.data.length > 0){",
+									"        pm.expect(responseJson.data[0].id).to.be.a('number');",
+									"        pm.expect(responseJson.data[0].title).to.be.a('string');",
+									"        pm.expect(responseJson.data[0].logoFilename).to.be.a('string');",
+									"    }",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"    \"title\": \"Generated schema for Root\",",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"status\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"data\": {",
+									"            \"type\": \"array\",",
+									"            \"items\": {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"id\": {",
+									"                        \"type\": \"number\"",
+									"                    },",
+									"                    \"title\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"logoFilename\": {",
+									"                        \"type\": \"string\"",
+									"                    }",
+									"                },",
+									"                \"required\": [",
+									"                    \"id\",",
+									"                    \"title\",",
+									"                    \"logoFilename\"",
+									"                ]",
+									"            }",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"status\",",
+									"        \"data\"",
+									"    ]",
+									"}",
+									"",
+									"// Fixed the failing test for response time",
+									"pm.test(\"Response time is within acceptable range\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/brands",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Car Models",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (!pm.collectionVariables.get(\"carBrandId\")) {",
+									"    throw new Error(\"carBrandId is not set. Run 'Fetch Car Brands' request first.\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"let brandId = pm.collectionVariables.get(\"carBrandId\");",
+									"",
+									"// Filter models by the given carBrandId",
+									"let models = responseJson.data.filter(m => m.carBrandId == brandId);",
+									"",
+									"// Check if any models exist for the given carBrandId",
+									"if (models.length > 0) {",
+									"    // Pick a random model from the filtered list",
+									"    var randomModel = models[Math.floor(Math.random() * models.length)];",
+									"    pm.collectionVariables.set(\"carModelId\", randomModel.id);",
+									"} else {",
+									"    throw new Error(\"No model found for the given carBrandId.\");",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", function () {",
+									"    const responseJson = pm.response.json(); // Define responseJson",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\"); // Updated to check for empty status",
+									"    pm.expect(responseJson.data).to.be.an('array');",
+									"    if(responseJson.data.length > 0){",
+									"        pm.expect(responseJson.data[0].id).to.be.a('number');",
+									"        pm.expect(responseJson.data[0].carBrandId).to.be.a('number');",
+									"        pm.expect(responseJson.data[0].title).to.be.a('string');",
+									"    }",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"const schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-06/schema#\",",
+									"    \"$ref\": \"#/definitions/Welcome8\",",
+									"    \"definitions\": {",
+									"        \"Welcome8\": {",
+									"            \"type\": \"object\",",
+									"            \"additionalProperties\": false,",
+									"            \"properties\": {",
+									"                \"status\": {",
+									"                    \"type\": \"string\"",
+									"                },",
+									"                \"data\": {",
+									"                    \"type\": \"array\",",
+									"                    \"items\": {",
+									"                        \"$ref\": \"#/definitions/Datum\"",
+									"                    }",
+									"                }",
+									"            },",
+									"            \"required\": [",
+									"                \"data\",",
+									"                \"status\"",
+									"            ],",
+									"            \"title\": \"Welcome8\"",
+									"        },",
+									"        \"Datum\": {",
+									"            \"type\": \"object\",",
+									"            \"additionalProperties\": false,",
+									"            \"properties\": {",
+									"                \"id\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"carBrandId\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"title\": {",
+									"                    \"type\": \"string\"",
+									"                }",
+									"            },",
+									"            \"required\": [",
+									"                \"carBrandId\",",
+									"                \"id\",",
+									"                \"title\"",
+									"            ],",
+									"            \"title\": \"Datum\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"",
+									"pm.test(\"Response time is within acceptable range\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/models",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post New Car",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (!pm.collectionVariables.get(\"carBrandId\") || !pm.collectionVariables.get(\"carModelId\")) {",
+									"    throw new Error(\"carBrandId or carModelId is not set. Run 'Fetch Car Brands' and 'Fetch Car Models' requests first.\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"carBrandId\": {{carBrandId}},\n  \"carModelId\": {{carModelId}},\n  \"mileage\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addExpenses",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"(function() {",
+									"    const initOrIncrementVariable = (variableName, initialValue, incrementValue) => {",
+									"        let value = pm.collectionVariables.get(variableName);",
+									"        value = value ? parseInt(value) + incrementValue : initialValue;",
+									"        pm.collectionVariables.set(variableName, value);",
+									"        return value;",
+									"    };",
+									"     const initialMileage = pm.collectionVariables.get(\"initialMileage\");",
+									"    if (initialMileage === undefined || initialMileage === null) {",
+									"        throw new Error(\"initialMileage is not set\");",
+									"    }",
+									"",
+									"    let mileage = initOrIncrementVariable(\"mileage\", initialMileage, 10);",
+									"    mileage = mileage <= initialMileage ? initialMileage + 10 : mileage;",
+									"    pm.collectionVariables.set(\"mileage\", mileage);",
+									"",
+									"    const liters = initOrIncrementVariable(\"liters\", 11, 1);",
+									"    const totalCost = initOrIncrementVariable(\"totalCost\", 11,1);",
+									"    const carId = pm.collectionVariables.get(\"carId\");",
+									"    if (!carId) throw new Error(\"carId is not set\");",
+									"",
+									"    var currentDate = new Date();",
+									"    var formattedDate = currentDate.toISOString().split('T')[0];",
+									"    console.log(formattedDate);",
+									"",
+									"    let updatedMileageAt = pm.collectionVariables.get(\"updatedMileageAt\");",
+									"    updatedMileageAt = updatedMileageAt ? updatedMileageAt : formattedDate;",
+									"    pm.collectionVariables.set(\"updatedMileageAt\", updatedMileageAt); ",
+									"",
+									"    const carInfo = {",
+									"        carId,",
+									"        reportedAt: updatedMileageAt,",
+									"        mileage,",
+									"        liters,",
+									"        totalCost,  ",
+									"        forceMileage: false",
+									"    };",
+									"",
+									"    pm.collectionVariables.set(\"carInfo\", JSON.stringify(carInfo));",
+									"    console.log(carInfo);",
+									"})();"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{carInfo}}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.status).to.be.eql(\"ok\")",
+									"});",
+									"",
+									"const Ajv = require('ajv');",
+									"const ajv = new Ajv();",
+									"",
+									"// Define the schema for the response",
+									"const schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"title\": \"Generated schema for Root\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"status\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"status\"",
+									"  ]",
+									"}",
+									"",
+									"// Validate the response against the schema",
+									"const validate = ajv.compile(schema);",
+									"const valid = validate(responseJson);",
+									"",
+									"pm.test(\"Schema is valid\", function() {",
+									"    pm.expect(valid).to.be.true;",
+									"    if (!valid) {",
+									"        console.log(\"Response is invalid:\", validate.errors);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://qauto.forstudy.space/api/users",
+							"protocol": "https",
+							"host": [
+								"qauto",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "generatedFirstName",
+			"value": ""
+		},
+		{
+			"key": "generatedLastName",
+			"value": ""
+		},
+		{
+			"key": "generatedEmail",
+			"value": ""
+		},
+		{
+			"key": "generatedPassword",
+			"value": ""
+		},
+		{
+			"key": "signupRequestBody",
+			"value": ""
+		},
+		{
+			"key": "generatedRemember",
+			"value": ""
+		},
+		{
+			"key": "generatedDateOfBirth",
+			"value": ""
+		},
+		{
+			"key": "generatedCountry",
+			"value": ""
+		},
+		{
+			"key": "randomPhotoName",
+			"value": ""
+		},
+		{
+			"key": "generatePasswordForChange",
+			"value": ""
+		},
+		{
+			"key": "carBrandId",
+			"value": ""
+		},
+		{
+			"key": "carModelId",
+			"value": ""
+		}
+	]
+}
