@@ -1578,6 +1578,33 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let response = getResponseJson();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.collectionVariables.set(\"initialMileage\", response.data.initialMileage);",
+									"",
+									"pm.collectionVariables.set(\"carId\", response.data.id);",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -1632,8 +1659,8 @@
 									"    const carId = pm.collectionVariables.get(\"carId\");",
 									"    if (!carId) throw new Error(\"carId is not set\");",
 									"",
-									"    var currentDate = new Date();",
-									"    var formattedDate = currentDate.toISOString().split('T')[0];",
+									"    let currentDate = new Date();",
+									"    let formattedDate = currentDate.toISOString().split('T')[0];",
 									"    console.log(formattedDate);",
 									"",
 									"    let updatedMileageAt = pm.collectionVariables.get(\"updatedMileageAt\");",
@@ -1652,6 +1679,50 @@
 									"    pm.collectionVariables.set(\"carInfo\", JSON.stringify(carInfo));",
 									"    console.log(carInfo);",
 									"})();"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function getResponseJson(){",
+									"    return pm.response.json();",
+									"}",
+									"",
+									"let responseJson = getResponseJson();",
+									"",
+									"pm.test(\"Request carId equal Response carId\", function (){",
+									"pm.expect(responseJson.data.carId).to.be.eql(pm.collectionVariables.get(\"carId\"));",
+									"})",
+									"",
+									"pm.test(\"Request reportedAt equal Response reportedAt\", function (){",
+									"pm.expect(responseJson.data.reportedAt).to.be.eql(pm.collectionVariables.get(\"updatedMileageAt\"));",
+									"})",
+									"",
+									"pm.test(\"Request liters equal Response liters\", function (){",
+									"pm.expect(responseJson.data.liters).to.be.eql(pm.collectionVariables.get(\"liters\"));",
+									"})",
+									"",
+									"pm.test(\"Request mileage equal Response mileage\", function (){",
+									"pm.expect(responseJson.data.mileage).to.be.eql(pm.collectionVariables.get(\"mileage\"));",
+									"})",
+									"",
+									"/**const bodyTest = () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.test(\"Response body has status ok\", () => pm.expect(jsonData.status).to.eql(\"ok\"));",
+									"    pm.test(\"Response body contains expected expense data\", () => {",
+									"        const expectedKeys = ['carId', 'reportedAt', 'liters', 'id', 'mileage', 'totalCost'];",
+									"        pm.expect(jsonData.data).to.have.keys(expectedKeys);",
+									"        pm.expect(jsonData.data.carId).to.eql(pm.collectionVariables.get(\"carId\"));",
+									"        pm.expect(jsonData.data.reportedAt).to.eql(pm.collectionVariables.get(\"updatedMileageAt\"));",
+									"        pm.expect(jsonData.data.mileage).to.eql(pm.collectionVariables.get(\"mileage\"));",
+									"        pm.expect(jsonData.data.liters).to.eql(pm.collectionVariables.get(\"liters\"));",
+									"        pm.expect(jsonData.data.totalCost).to.eql(pm.collectionVariables.get(\"totalCost\"));",
+									"    });",
+									"};**/"
 								],
 								"type": "text/javascript",
 								"packages": {}
